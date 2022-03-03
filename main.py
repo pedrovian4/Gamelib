@@ -1,7 +1,7 @@
-from flask import Flask, redirect, render_template,request,redirect
+from flask import Flask, flash, redirect, render_template,request,redirect, session
 
 app = Flask(__name__)
-
+app.secret_key = 'AWP'
 class Game:
     def __init__(self,name, console, type) -> None:
         self.__name= name
@@ -41,4 +41,18 @@ def create():
     games_list.append(new_game)
     return redirect('/')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.route('/auth', methods=['POST',])
+def auth():
+    if 'password' == request.form['password']:
+        session['user_logged']= request.form['user']
+        flash( '{} was logged\nlogin was sucessfull'.format(session['user_logged'])) 
+        return redirect('/assign')
+    else:
+        flash('Password or Username wrong')
+        return redirect('/login')          
 app.run(debug=True,host='0.0.0.0', port=6060)

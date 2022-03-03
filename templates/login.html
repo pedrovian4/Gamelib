@@ -1,0 +1,30 @@
+
+{%extends "template.html"%}
+{%block content%}
+<div class="container" class="input-group">   
+    <h1>Sign In</h1>
+    <form action="/auth" method="post">
+        <p><label>User</label><input placeholder="USER!@#" class="form-control" type="text" name="user"></p>
+        <p><label>Password</label><input  
+           placeholder="12BSHAKS$%" name="password" class="form-control" type="password" id="myInput" >
+            <img id= "eye-img" onclick="showPassword()" style="height: 20px;" src="/static/images/eye-closed.png" alt="">
+        </p>
+        <p><button class="btn btn-primary" type="submit">Entrar</button></p>
+    </form>
+</div>
+<script>
+    function showPassword(){
+        let inputBox = document.getElementById
+("myInput");
+        let eyeImg = document.getElementById("eye-img")
+        if(inputBox.type==="password"){
+            inputBox.type="text";
+            eyeImg.src= "/static/images/eye -open.png";
+
+        }else{
+            inputBox.type="password"
+            eyeImg.src= "/static/images/eye-closed.png";
+        }
+    }
+</script>
+{%endblock%}
